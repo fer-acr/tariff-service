@@ -58,6 +58,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TariffErrorResponse"
+        '409':
+          description: Conflict in tariffs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TariffErrorResponse"
 
 components:
   schemas:
