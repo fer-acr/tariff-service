@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Tariff Service - Fernando Álvarez
+  description: |-
+    INDITEX assignment for Core Platform jon application. The aim of this project is to find the properly tariff to apply to a product in a concrete time.
+  contact:
+    email: fernando_ayr@outlook.com
+  version: 0.0.1
+tags:
+  - name: tariff
+    description: Tariff management endpoints
+paths:
+  /tariff:
+    get:
+      tags:
+        - tariff
+      summary: Get a tariff for a product and brand at a given datetime
+      description: Update an existing pet by Id
+      operationId: getTariff
+      parameters:
+        - name: productId
+          in: query
+          description: Product identifier to obtain the tariff
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+        - name: brandId
+          in: query
+          description: Brand identifier to obtain the tariff
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+        - name: applicationDatetime
+          in: query
+          description: Product id to obtain the tariff
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TariffResponse'
+        '400':
+          description: Invalid identifiers or datetime supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TariffErrorResponse"
+        '404':
+          description: Tariff not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TariffErrorResponse"
+
+components:
+  schemas:
+    TariffResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int32
+        brandId:
+          type: integer
+          format: int32
+        tariffId:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: float
+          example: 7.99
+        currency:
+          type: string
+          example: "EUR"
+        startDatetime:
+          type: string
+          format: date-time
+        endDatetime:
+          type: string
+          format: date-time
+    TariffErrorResponse:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Title of the error"
+          example: "Tariff not found"
+        detail:
+          type: string
+          description: "Extended description of the error"
+          example: "No tariff found for the product id and brand id"
