@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: tariff-service
+  datasource:
+    url: jdbc:h2:mem:inmemorydb
+    username: itx-test
+    password: itx-pass
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
