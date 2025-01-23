@@ -18,3 +18,16 @@ the necessary to make the project run.
 
 The sample data is going to be inserted into the H2 InMemory Database from the data.sql file defined in
 src/main/resources with the aim to have some data included.
+
+## Some notes
+
+- Anemic domain is presented because currently does not have any functionality in the model object. The business logic
+  is in the domain service.
+- Application layer is in charged to have the use cases, calling the domain services... some managers could also be
+  defined within it if many domain services would have to interchange information.
+- In infrastructure, rest and repository layers have the responsability of mapping the domain object previous to execute
+  any call into inner layers (as application or domain).
+- Avoid of use lombok or mapstruct by using the Java API instead. I also could use it but I decided not to do it to take
+  advantage of the language.
+- Unit tests and Integration tests have been implemented.
+- **IMPORTANT**: the data.sql file is loaded both for testing and starting the service.
